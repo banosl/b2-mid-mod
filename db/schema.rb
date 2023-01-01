@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_01_230129) do
+ActiveRecord::Schema.define(version: 2023_01_01_231300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,9 @@ ActiveRecord::Schema.define(version: 2023_01_01_230129) do
     t.bigint "department_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "ticket_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
+    t.index ["ticket_id"], name: "index_employees_on_ticket_id"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -36,7 +38,11 @@ ActiveRecord::Schema.define(version: 2023_01_01_230129) do
     t.integer "age"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "employee_id"
+    t.index ["employee_id"], name: "index_tickets_on_employee_id"
   end
 
   add_foreign_key "employees", "departments"
+  add_foreign_key "employees", "tickets"
+  add_foreign_key "tickets", "employees"
 end
