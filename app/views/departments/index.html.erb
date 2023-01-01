@@ -1,0 +1,6 @@
+<h1>Departments at Nordstrom</h1>
+
+<% @departments.each do |department| %>
+  <h2><%= department.name %></h2>
+    Level: <%= department.floor %>  
+<% end %>
