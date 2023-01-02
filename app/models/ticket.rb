@@ -1,3 +1,4 @@
 class Ticket < ApplicationRecord
-    has_many :employees
+    has_many :ticket_employees
+    has_many :employees, through: :ticket_employees
 end
