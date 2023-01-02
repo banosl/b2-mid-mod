@@ -19,7 +19,7 @@ RSpec.describe "Employee Show", type: :feature do
 
       expect(page).to have_content("#{@employee_1.name}")
       expect(page).to_not have_content("#{@employee_2.name}")
-      expect(page).to have_content("Department: #{@employee_1.department}")
+      expect(page).to have_content("Department: #{@employee_1.department.name}")
     end
   end
 end
