@@ -1,3 +1,6 @@
 <h1><%= @employee.name %></h1>
 
-Department: <%= @employee.department.name %>
+Department: <%= @employee.department.name %><br/>
+Tickets: <% @employee.tickets.each do |ticket| %><br/>
+           <li><%= ticket.subject %></li>
+         <% end %>
