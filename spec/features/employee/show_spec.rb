@@ -67,7 +67,6 @@ RSpec.describe "Employee Show", type: :feature do
       expect(page).to_not have_content("#{@ticket_3.subject}")
 
       fill_in "Ticket ID:", with: "#{@ticket_2.id}"
-      save_and_open_page
       click_button "Assign Ticket"
 
       expect(page).to have_content("#{@ticket_2.subject}")
