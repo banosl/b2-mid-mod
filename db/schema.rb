@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_01_231300) do
+ActiveRecord::Schema.define(version: 2023_01_02_012825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 2023_01_01_231300) do
     t.bigint "ticket_id"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["ticket_id"], name: "index_employees_on_ticket_id"
+  end
+
+  create_table "ticket_employees", force: :cascade do |t|
+    t.integer "ticket_id"
+    t.integer "employee_id"
   end
 
   create_table "tickets", force: :cascade do |t|
