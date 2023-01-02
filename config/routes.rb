@@ -3,6 +3,6 @@ Rails.application.routes.draw do
 
   get '/departments', to: 'departments#index'
   get '/employees/:id', to: 'employees#show'
-  post '/employees/:id', to: 'employees#create'
+  post '/employees/:id', to: 'ticket_employees#create'
 
 end
