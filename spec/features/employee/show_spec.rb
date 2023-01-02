@@ -50,7 +50,17 @@ RSpec.describe "Employee Show", type: :feature do
     end
 
     it "form is filled out with id of ticket that already exists 
-    and user is redirected back to the employee's show page with the ticket subject listed"
-    
+    and user is redirected back to the employee's show page with the ticket subject listed"do
+      visit "/employees/#{@employee_5.id}"
+
+      expect(page).to have_content("#{@ticket_8}")
+      expect(page).to_not have_content("#{@ticket_2}")
+      expect(page).to_not have_content("#{@ticket_3}")
+
+      fill_in "Ticket ID:", with: "#{@ticket_2.id}"
+      click_button "Assign Ticket"
+
+      expect(page).to have_content("#{@ticket_2.subject}")
+    end
   end
 end
