@@ -12,18 +12,27 @@ RSpec.describe "Employee Show", type: :feature do
       @employee_4 = Employee.create({name: "Juanita", level: 1, department_id: @department_3.id})
       @employee_5 = Employee.create({name: "Facundo", level: 1, department_id: @department_3.id})
       @employee_6 = Employee.create({name: "Meghan", level: 1, department_id: @department_3.id})
-      @ticket_1 = Ticket.create({subject: "Broken shoe", age: 3, employee_id: @employee_1.id})
-      @ticket_2 = Ticket.create({subject: "Old mold", age: 5, employee_id: @employee_2.id})
-      @ticket_3 = Ticket.create({subject: "Need trash bags", age: 7, employee_id: @employee_2.id})
-      @ticket_4 = Ticket.create({subject: "Broken printer", age: 3, employee_id: @employee_1.id})
-      @ticket_5= Ticket.create({subject: "Rat problem", age: 38, employee_id: @employee_3.id})
-      @ticket_6 = Ticket.create({subject: "Burnt popcorn", age: 3, employee_id: @employee_3.id})
-      @ticket_7 = Ticket.create({subject: "No pie left", age: 33, employee_id: @employee_4.id})
-      @ticket_8 = Ticket.create({subject: "Large you know what", age: 23, employee_id: @employee_5.id})
-      @ticket_9 = Ticket.create({subject: "Delivery", age: 13, employee_id: @employee_6.id})
-      @ticket_10 = Ticket.create({subject: "Awkward silences", age: 33, employee_id: @employee_6.id})
-      @ticket_11 = Ticket.create({subject: "Smells", age: 56, employee_id: @employee_4.id})
-      @ticket_12 = Ticket.create({subject: "Broken door", age: 6, employee_id: @employee_3.id})
+      @ticket_1 = Ticket.create({subject: "Broken shoe", age: 3})
+      @ticket_2 = Ticket.create({subject: "Old mold", age: 5})
+      @ticket_3 = Ticket.create({subject: "Need trash bags", age: 7})
+      @ticket_4 = Ticket.create({subject: "Broken printer", age: 3})
+      @ticket_5= Ticket.create({subject: "Rat problem", age: 38})
+      @ticket_6 = Ticket.create({subject: "Burnt popcorn", age: 3})
+      @ticket_7 = Ticket.create({subject: "No pie left", age: 33})
+      @ticket_8 = Ticket.create({subject: "Large you know what", age: 23})
+      @ticket_9 = Ticket.create({subject: "Delivery", age: 13})
+      @ticket_10 = Ticket.create({subject: "Awkward silences", age: 33})
+      @ticket_11 = Ticket.create({subject: "Smells", age: 56})
+      @ticket_12 = Ticket.create({subject: "Broken door", age: 6})
+      @ticket_employee_1 = TicketEmployee.create({ticket_id: @ticket_5.id, employee_id: @employee_3.id})
+      @ticket_employee_2 = TicketEmployee.create({ticket_id: @ticket_6.id, employee_id: @employee_3.id})
+      @ticket_employee_3 = TicketEmployee.create({ticket_id: @ticket_12.id, employee_id: @employee_3.id})
+      @ticket_employee_4 = TicketEmployee.create({ticket_id: @ticket_8.id, employee_id: @employee_5.id})
+    #   @ticket_employee_5 = TicketEmployee.create({})
+    #   @ticket_employee_6 = TicketEmployee.create({})
+    #   @ticket_employee_7 = TicketEmployee.create({})
+    #   @ticket_employee_8 = TicketEmployee.create({})
+    #   @ticket_employee_9 = TicketEmployee.create({})
     end
 
     it 'see employee name and department' do
@@ -53,11 +62,12 @@ RSpec.describe "Employee Show", type: :feature do
     and user is redirected back to the employee's show page with the ticket subject listed"do
       visit "/employees/#{@employee_5.id}"
 
-      expect(page).to have_content("#{@ticket_8}")
-      expect(page).to_not have_content("#{@ticket_2}")
-      expect(page).to_not have_content("#{@ticket_3}")
+      expect(page).to have_content("#{@ticket_8.subject}")
+      expect(page).to_not have_content("#{@ticket_2.subject}")
+      expect(page).to_not have_content("#{@ticket_3.subject}")
 
       fill_in "Ticket ID:", with: "#{@ticket_2.id}"
+      save_and_open_page
       click_button "Assign Ticket"
 
       expect(page).to have_content("#{@ticket_2.subject}")
