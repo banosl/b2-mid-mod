@@ -1,6 +1,17 @@
 <h1><%= @employee.name %></h1>
 
 Department: <%= @employee.department.name %><br/>
-Tickets: <% @employee.tickets.each do |ticket| %><br/>
+
+<br/>Tickets: <% @employee.tickets.each do |ticket| %>
            <li><%= ticket.subject %></li>
-         <% end %>
+         <% end %><br/>
+
+<section>
+Assign existing ticket to <%= @employee.name %><br/>
+
+<br/><%= form_with url: "/employees/#{@employee.id}", method: :post, local: true do |form| %>
+<%= form.label :ticket_id, "Ticket ID:" %>
+<%= form.text_field :ticket_id %>
+<%= form.submit "Assign Ticket" %>
+<% end %>
+</section>

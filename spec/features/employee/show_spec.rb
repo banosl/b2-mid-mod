@@ -34,13 +34,23 @@ RSpec.describe "Employee Show", type: :feature do
       expect(page).to have_content("Department: #{@employee_1.department.name}")
     end
 
-    it "see a list of all the employee's tickets" do
+    it "see a list of all the employee's tickets and not ones not assigned to them" do
       visit "/employees/#{@employee_3.id}"
-save_and_open_page
+
       expect(page).to have_content("#{@ticket_5.subject}")
       expect(page).to have_content("#{@ticket_6.subject}")
       expect(page).to have_content("#{@ticket_12.subject}")
       expect(page).to_not have_content("#{@ticket_2.subject}")
     end
+
+    it "see a form to add a ticket to this department" do
+      visit "/employees/#{@employee_4.id}"
+
+      expect(page).to have_field("Ticket ID:")
+    end
+
+    it "form is filled out with id of ticket that already exists 
+    and user is redirected back to the employee's show page with the ticket subject listed"
+    
   end
 end
